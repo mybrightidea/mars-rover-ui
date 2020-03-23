@@ -1,3 +1,35 @@
+.rover {
+  background-image: url("images/rover-l.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: all 1s;
+}
+
+.start-cell {
+  border: solid 2px green;
+}
+
+.end-cell {
+  background-color: red;
+}
+
+.rover-orientation-E {
+  transform: scaleX(-1);
+}
+
+.rover-orientation-W {}
+
+.rover-orientation-N {
+  transform: rotate(90deg);
+}
+
+.rover-orientation-S {
+  transform: rotate(-90deg);
+}
+
+
+
+
 table {
   border: solid 0.5px black;
 }
@@ -7,35 +39,10 @@ td {
   @include transition(all 0.2s);
   height: 4rem;
   width: 4rem;
+  width: 40px;
+  height: 40px;
   text-align: center;
   vertical-align: middle;
 }
 
-td.not--island {
-  background-color: white;
-}
-td.not--island:hover {
-  background-color: $light-grey;
-}
-
-td.island {
-  background-color: $teal;
-}
-td.island--hover:not(.clicked) {
-  background-color: $teal-hover;
-  @include prefix(transform, scale(1.1), ms webkit spec);
-  cursor: pointer;
-}
-
-td.island.clicked {
-  background-color: $light-green;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2300675/tree-icon.png"),
-    url("/images/tree-icon.png");
-  background-size: contain;
-  color: white;
-  font-weight: bold;
-  font-size: $font-size-large;
-}
-td.island.clicked.island--hover {
-  background-color: teal;
-}
+.plateau-cell {}

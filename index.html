@@ -13,6 +13,7 @@
       type="text/javascript"
       src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2300675/rover.js"
     ></script>
+    <script type="text/javascript" src="script.js"></script>
   </head>
 
   <body>
@@ -27,117 +28,59 @@
         <div class="box-layout__content">
           <div class="box-layout__content--table">
             <table>
-              <tbody id="puzzle"></tbody>
+              <tbody id="plateau"></tbody>
             </table>
           </div>
         </div>
 
         <div class="box-layout__footer">
-          <h3>Footer</h3>
-          <style>
-            .rover {
-              width: 40px;
-              height: 40px;
-              background-image: url("images/rover-l.png");
-              background-size: contain;
-              background-repeat: no-repeat;
-              transition: all 1s;
-            }
-            .rover-orientation-E {
-              transform: scaleX(-1);
-            }
-            .rover-orientation-W {
-              transform: rotate(0);
-            }
-            .rover-orientation-N {
-              transform: rotate(90deg);
-            }
-            .rover-orientation-S {
-              transform: rotate(-90deg);
-            }
-          </style>
-          <div
-            id="rover"
-            class="rover rover-orientation-W"
-            orientation="W"
-          ></div>
-          <button onclick="(rotateRover('L'))">L</button>
-          <button onclick="(rotateRover('R'))">R</button>
+          <form class="form" onsubmit="">
+            <label for="orientation"
+              >Orientation:
+              <select id="orientation" onchange="onParametersChange()">
+                <option value="N">N</option>
+                <option value="E" selected>E</option>
+                <option value="S">S</option>
+                <option value="W">W</option>
+              </select> </label
+            ><br />
+
+            <label for="startX"
+              >Start X (between 0 and 5):
+              <input
+                onchange="onParametersChange()"
+                type="number"
+                id="startX"
+                name="startX"
+                min="0"
+                max="5"
+                value="0"/></label
+            ><br />
+
+            <label for="startY"
+              >Start Y (between 0 and 5):
+              <input
+                onchange="onParametersChange()"
+                type="number"
+                id="startY"
+                name="startY"
+                min="0"
+                max="5"
+                value="0"/></label
+            ><br />
+
+            <input
+              type="text"
+              id="instructions"
+              placeholder="Instructions"
+              onchange="onInstructionsChange(this)"
+              className="text-input"
+              value="RRMMLM"
+            /><br />
+          </form>
+          <button onclick="onPlayClick()">Play</button>
         </div>
       </div>
     </div>
   </body>
 </html>
-
-<script>
-  const rotateRover = rotateDirection => {
-    const rover = document.getElementById("rover");
-    const currentOrientation = rover.getAttribute("orientation");
-    const newOrientation = setOrientation(currentOrientation, rotateDirection);
-    orientRover(rover, newOrientation);
-    rover.setAttribute("orientation", newOrientation);
-  };
-
-  const setOrientation = (currentOrientation, rotateDirection) => {
-    let currentOrdinal = 0;
-    switch (currentOrientation) {
-      case "E":
-        currentOrdinal = 1;
-        break;
-      case "S":
-        currentOrdinal = 2;
-        break;
-      case "W":
-        currentOrdinal = 3;
-        break;
-      default:
-    }
-
-    let ordinalAdjustment = 0;
-    switch (rotateDirection) {
-      case "R":
-        ordinalAdjustment = 1;
-        break;
-      case "L":
-        ordinalAdjustment = -1;
-        break;
-      default:
-    }
-    const newOrientationOrdinal = currentOrdinal + ordinalAdjustment;
-    let returnValue = "";
-    console.log(newOrientationOrdinal);
-    switch (newOrientationOrdinal) {
-      case 0:
-      case 4:
-        console.log("N");
-        returnValue = "N";
-        break;
-      case 1:
-        returnValue = "E";
-        break;
-      case 2:
-        returnValue = "S";
-        break;
-      case 3:
-      case -1:
-        returnValue = "W";
-        break;
-      default:
-    }
-    return returnValue;
-  };
-
-  const orientRover = (rover, direction) => {
-    const requiredClass = `rover-orientation-${direction}`;
-
-    if (rover.className.includes(requiredClass)) {
-      return;
-    }
-    rover.classList.forEach(c => {
-      if (c !== requiredClass && c.includes("rover-orientation-")) {
-        rover.classList.remove(c);
-      }
-    });
-    rover.classList.add(requiredClass);
-  };
-</script>
