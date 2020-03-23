@@ -1,68 +1,113 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setParameters } from "../actions/process.actions";
+
 class Footer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { ...this.props.parameters };
   }
+
+  onParametersChange = event => {
+    const target = event.target;
+    const name = target.name;
+
+    const value =
+      name === "orientation"
+        ? target.value
+        : isNaN(target.value)
+        ? 0
+        : parseInt(target.value);
+    this.setState(
+      () => ({ [name]: value }),
+      () => {
+        this.props.dispatch(setParameters(this.state));
+      }
+    );
+  };
+
+  onInstructionsChange = event => {
+    const target = event.target;
+    const value = target.value.toUpperCase();
+    const name = target.name;
+
+    if (!value || value.match(/^[LRMlrm]*$/)) {
+      this.setState(
+        () => ({ [name]: value }),
+        () => {
+          this.props.dispatch(setParameters(...this.state));
+        }
+      );
+    }
+  };
+
+  onPlayClick = e => {
+    e.preventDefault();
+  };
+
   render() {
+    const { startX, startY, orientation, instructions } = this.state;
+
     return (
       <div className="box-layout__footer">
-        <form className="form" onsubmit="">
-          <label for="orientation">
+        <form className="form">
+          <label htmlFor="orientation">
             Orientation:
-            <select id="orientation" onchange="onParametersChange()">
+            <select
+              name="orientation"
+              onChange={this.onParametersChange}
+              value={orientation}
+            >
               <option value="N">N</option>
-              <option value="E" selected>
-                E
-              </option>
+              <option value="E">E </option>
               <option value="S">S</option>
               <option value="W">W</option>
-            </select>{" "}
+            </select>
           </label>
           <br />
 
-          <label for="startX">
+          <label htmlFor="startX">
             Start X (between 0 and 5):
             <input
-              onchange="onParametersChange()"
+              onChange={this.onParametersChange}
               type="number"
-              id="startX"
               name="startX"
               min="0"
               max="5"
-              value="0"
+              value={startX}
             />
           </label>
           <br />
 
-          <label for="startY">
+          <label htmlFor="startY">
             Start Y (between 0 and 5):
             <input
-              onchange="onParametersChange()"
+              onChange={this.onParametersChange}
               type="number"
-              id="startY"
               name="startY"
               min="0"
               max="5"
-              value="0"
+              value={startY}
             />
           </label>
           <br />
 
           <input
             type="text"
-            id="instructions"
+            name="instructions"
             placeholder="Instructions"
-            onchange="onInstructionsChange(this)"
+            onChange={this.onInstructionsChange}
             className="text-input"
-            value="RRMMLM"
+            value={instructions}
           />
           <br />
         </form>
-        <button onclick="onPlayClick()">Play</button>
+        <button onClick={this.onPlayClick}>Play</button>
       </div>
     );
   }
 }
 
-export default Footer;
+const mapStateToProps = state => ({ parameters: state.parameters });
+
+export default connect(mapStateToProps)(Footer);
