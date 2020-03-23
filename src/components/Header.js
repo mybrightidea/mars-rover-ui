@@ -10,7 +10,7 @@ class Header extends Component {
   }
   onSliderChange = event => {
     const target = event.target;
-    const value = parseInt(target.value, 10);
+    const value = parseInt(target.value);
     const name = target.name;
 
     this.setState(

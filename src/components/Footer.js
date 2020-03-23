@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import validator from "validator";
 import { connect } from "react-redux";
 import { setParameters } from "../actions/process.actions";
 
@@ -8,22 +9,32 @@ class Footer extends Component {
     this.state = { ...this.props.parameters };
   }
 
-  onParametersChange = event => {
+  onOrientationChange = event => {
     const target = event.target;
     const name = target.name;
 
-    const value =
-      name === "orientation"
-        ? target.value
-        : isNaN(target.value)
-        ? 0
-        : parseInt(target.value);
+    const value = target.value;
+
     this.setState(
       () => ({ [name]: value }),
       () => {
         this.props.dispatch(setParameters(this.state));
       }
     );
+  };
+  onStartPositionChange = (event, maxVal) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+
+    if (validator.isInt(value, { min: 0, max: maxVal })) {
+      this.setState(
+        () => ({ [name]: parseInt(value) }),
+        () => {
+          this.props.dispatch(setParameters(this.state));
+        }
+      );
+    }
   };
 
   onInstructionsChange = event => {
@@ -35,7 +46,7 @@ class Footer extends Component {
       this.setState(
         () => ({ [name]: value }),
         () => {
-          this.props.dispatch(setParameters(...this.state));
+          this.props.dispatch(setParameters(this.state));
         }
       );
     }
@@ -47,6 +58,7 @@ class Footer extends Component {
 
   render() {
     const { startX, startY, orientation, instructions } = this.state;
+    const { maxX, maxY } = this.props.config;
 
     return (
       <div className="box-layout__footer">
@@ -55,7 +67,7 @@ class Footer extends Component {
             Orientation:
             <select
               name="orientation"
-              onChange={this.onParametersChange}
+              onChange={this.onOrientationChange}
               value={orientation}
             >
               <option value="N">N</option>
@@ -67,27 +79,27 @@ class Footer extends Component {
           <br />
 
           <label htmlFor="startX">
-            Start X (between 0 and 5):
+            {`Start X (between 0 and ${maxX}):`}
             <input
-              onChange={this.onParametersChange}
+              onChange={e => this.onStartPositionChange(e, maxX)}
               type="number"
               name="startX"
               min="0"
-              max="5"
-              value={startX}
+              max={maxX}
+              value={Math.min(startX, maxX)}
             />
           </label>
           <br />
 
           <label htmlFor="startY">
-            Start Y (between 0 and 5):
+            {`Start Y (between 0 and ${maxY}):`}
             <input
-              onChange={this.onParametersChange}
+              onChange={e => this.onStartPositionChange(e, maxY)}
               type="number"
               name="startY"
               min="0"
-              max="5"
-              value={startY}
+              max={maxY}
+              value={Math.min(startY, maxY)}
             />
           </label>
           <br />
@@ -108,6 +120,9 @@ class Footer extends Component {
   }
 }
 
-const mapStateToProps = state => ({ parameters: state.parameters });
+const mapStateToProps = state => ({
+  parameters: state.parameters,
+  config: state.config
+});
 
 export default connect(mapStateToProps)(Footer);
