@@ -1,5 +1,5 @@
 .rover {
-  background-image: url("images/rover-l.png");
+  background-image: url("/images/rover-l.png");
   background-size: contain;
   background-repeat: no-repeat;
   transition: all 1s;
@@ -17,7 +17,8 @@
   transform: scaleX(-1);
 }
 
-.rover-orientation-W {}
+.rover-orientation-W {
+}
 
 .rover-orientation-N {
   transform: rotate(90deg);
@@ -26,9 +27,6 @@
 .rover-orientation-S {
   transform: rotate(-90deg);
 }
-
-
-
 
 table {
   border: solid 0.5px black;
@@ -45,4 +43,5 @@ td {
   vertical-align: middle;
 }
 
-.plateau-cell {}
+.plateau-cell {
+}
