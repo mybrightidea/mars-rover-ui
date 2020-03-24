@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import validator from "validator";
 import { connect } from "react-redux";
-import {
-  setStartOrientation,
-  setStartXY,
-  setInstructions
-} from "../actions/parameters.actions";
 
 class Footer extends Component {
-  onOrientationChange = event => {
-    this.props.dispatch(setStartOrientation(event.target.value));
-  };
+  onOrientationChange = event =>
+    this.props.updateParameters({ orientation: event.target.value });
 
   onStartPositionChange = (event, maxVal) => {
     const target = event.target;
@@ -20,27 +14,23 @@ class Footer extends Component {
     if (validator.isInt(value, { min: 0, max: maxVal })) {
       switch (name) {
         case "startX":
-          this.props.dispatch(
-            setStartXY(parseInt(value), this.props.parameters.startY)
-          );
+          this.props.updateParameters({ startX: parseInt(value) });
           break;
+
         case "startY":
-          this.props.dispatch(
-            setStartXY(this.props.parameters.startX, parseInt(value))
-          );
+          this.props.updateParameters({ startY: parseInt(value) });
           break;
+
         default:
       }
     }
   };
 
   onInstructionsChange = event => {
-    const target = event.target;
-    const value = target.value.toUpperCase();
-    const name = target.name;
+    const value = event.target.value.toUpperCase();
 
     if (!value || value.match(/^[LRMlrm]*$/)) {
-      this.props.dispatch(setInstructions(value));
+      this.props.updateParameters({ instructions: value });
     }
   };
 

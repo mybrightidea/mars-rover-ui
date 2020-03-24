@@ -4,20 +4,27 @@ import Header from "../Header";
 import Body from "../Body";
 import Footer from "../Footer";
 import { intitlialisePlateau } from "../../actions/plateau.actions";
+import { setParameters } from "../../actions/parameters.actions";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    const { maxX, maxY } = props.parameters;
-    props.dispatch(intitlialisePlateau(maxX, maxY));
+    this.updateParameters({});
   }
+
+  updateParameters = parameter => {
+    this.props.dispatch(
+      setParameters({ ...this.props.parameters, ...parameter })
+    );
+  };
+
   render() {
     return (
       <div className="box-layout">
         <div className="box-layout__box">
-          <Header />
+          <Header updateParameters={this.updateParameters} />
           <Body />
-          <Footer />
+          <Footer updateParameters={this.updateParameters} />
         </div>
       </div>
     );

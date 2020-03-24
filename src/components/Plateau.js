@@ -21,7 +21,8 @@ class Plateau extends Component {
             key={`row${row}col${col}`}
             className={
               (plateau[row][col].startCell ? "start-cell" : "") +
-              (plateau[row][col].endCell ? "end-cell" : "")
+              (plateau[row][col].endCell ? "end-cell" : "") +
+              (plateau[row][col].rover ? "rover" : "")
             }
           ></td>
         );

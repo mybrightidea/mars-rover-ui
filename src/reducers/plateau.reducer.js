@@ -1,5 +1,6 @@
 import { plateauConstants } from "../constants/plateau.constants";
 import { parametersConstants } from "../constants/parameters.constants";
+import { clearAllCells } from "../actions/plateau.actions";
 const plateauReducerDefaultState = {
   plateau: []
 };
@@ -14,18 +15,19 @@ export default (state = plateauReducerDefaultState, action) => {
           endCell: false
         })
       );
-    case parametersConstants.PLATEAU_RESIZE:
-      return new Array(action.maxY + 1).fill(0).map(() =>
-        new Array(action.maxX + 1).fill({
+    case parametersConstants.SET_PARAMETERS:
+      const newPlateau = new Array(action.parameters.maxY + 1).fill(0).map(() =>
+        new Array(action.parameters.maxX + 1).fill({
           startCell: false,
           endCell: false
         })
       );
-    case parametersConstants.SET_START_XY:
-      console.log(state);
-      return state.map((row, rowIndex) =>
+      return newPlateau.map((row, rowIndex) =>
         row.map((cell, colIndex) => {
-          if (rowIndex === action.startY && colIndex === action.startX) {
+          if (
+            rowIndex === action.parameters.startY &&
+            colIndex === action.parameters.startX
+          ) {
             return { ...cell, startCell: true };
           } else {
             return { ...cell, startCell: false };

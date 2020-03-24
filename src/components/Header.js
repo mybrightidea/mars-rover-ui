@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setMaxXY } from "../actions/parameters.actions";
 import Slider from "./Slider";
 
 class Header extends Component {
@@ -11,10 +10,10 @@ class Header extends Component {
 
     switch (name) {
       case "maxX":
-        this.props.dispatch(setMaxXY(value, this.props.parameters.maxY));
+        this.props.updateParameters({ maxX: value });
         break;
       case "maxY":
-        this.props.dispatch(setMaxXY(this.props.parameters.maxX, value));
+        this.props.updateParameters({ maxY: value });
         break;
       default:
     }

@@ -11,25 +11,12 @@ const parametersReducerDefaultState = {
 
 export default (state = parametersReducerDefaultState, action) => {
   switch (action.type) {
-    case parametersConstants.SET_NAME:
-      return { ...state, name: action.name };
-    case parametersConstants.SET_START_ORIENTATION:
-      return { ...state, orientation: action.orientation };
-    case parametersConstants.SET_INSTRUCTIONS:
-      return { ...state, instructions: action.instructions };
-    case parametersConstants.SET_START_XY:
+    case parametersConstants.SET_PARAMETERS:
       return {
         ...state,
-        startX: action.startX,
-        startY: action.startY
-      };
-    case parametersConstants.PLATEAU_RESIZE:
-      return {
-        ...state,
-        maxX: action.maxX,
-        maxY: action.maxY,
-        startX: Math.min(state.startX, action.maxX),
-        startY: Math.min(state.startY, action.maxY)
+        ...action.parameters,
+        startX: Math.min(action.parameters.startX, action.parameters.maxX),
+        startY: Math.min(action.parameters.startY, action.parameters.maxY)
       };
     default:
       return state;
