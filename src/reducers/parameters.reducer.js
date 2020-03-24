@@ -12,11 +12,11 @@ const parametersReducerDefaultState = {
 export default (state = parametersReducerDefaultState, action) => {
   switch (action.type) {
     case parameterConstants.SET_NAME:
-      return { ...state, ...action.name };
+      return { ...state, name: action.name };
     case parameterConstants.SET_ORIENTATION:
-      return { ...state, ...action.orientation };
+      return { ...state, orientation: action.orientation };
     case parameterConstants.SET_INSTRUCTIONS:
-      return { ...state, ...action.instructions };
+      return { ...state, instructions: action.instructions };
     case parameterConstants.SET_START_X:
       return {
         ...state,

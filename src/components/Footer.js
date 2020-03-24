@@ -9,8 +9,9 @@ import {
 } from "../actions/parameter.actions";
 
 class Footer extends Component {
-  onOrientationChange = event =>
+  onOrientationChange = event => {
     this.props.dispatch(setOrientation(event.target.value));
+  };
 
   onStartPositionChange = (event, maxVal) => {
     const target = event.target;
