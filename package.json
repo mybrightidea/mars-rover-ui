@@ -6,7 +6,9 @@
   "scripts": {
     "build:dev": "webpack",
     "dev-server": "webpack-dev-server",
-    "server": "dev-server"
+    "server": "dev-server",
+    "build:prod": "webpack -p --env production",
+    "heroku-postbuild": "npm run build:prod"
   },
   "repository": {
     "type": "git",
