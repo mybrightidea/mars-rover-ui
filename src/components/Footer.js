@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import validator from "validator";
 import { connect } from "react-redux";
+import { jRover } from "../rover";
+import { setCellVisited, setEndCell } from "../actions/plateau.actions";
 
 class Footer extends Component {
   onOrientationChange = event =>
@@ -35,7 +37,39 @@ class Footer extends Component {
   };
 
   onPlayClick = e => {
+    const {
+      maxX,
+      maxY,
+      startX,
+      startY,
+      orientation,
+      instructions
+    } = this.props.parameters;
+
     e.preventDefault();
+
+    const result = jRover.solveProblem([
+      [maxX, maxY],
+      [startX, startY, orientation],
+      instructions
+    ]);
+
+    const { x, y, path } = result.roverEndStates[0];
+
+    this.props.dispatch(setEndCell(x, y));
+
+    this.outputPath(path);
+  };
+
+  outputPath = path => {
+    const [step] = path.slice(0, 1);
+    this.props.dispatch(setCellVisited(step.x, step.y, step.orientation));
+
+    if (path.length > 1) {
+      setTimeout(() => {
+        this.outputPath(path.slice(1));
+      }, 1500);
+    }
   };
 
   render() {

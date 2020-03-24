@@ -21,8 +21,12 @@ class Plateau extends Component {
             key={`row${row}col${col}`}
             className={
               (plateau[row][col].startCell ? "start-cell" : "") +
-              (plateau[row][col].endCell ? "end-cell" : "") +
-              (plateau[row][col].rover ? "rover" : "")
+              (plateau[row][col].endCell ? " end-cell" : "") +
+              (plateau[row][col].visited ? " rover" : "") +
+              (plateau[row][col].north ? " rover-orientation-N" : "") +
+              (plateau[row][col].east ? " rover-orientation-E" : "") +
+              (plateau[row][col].south ? " rover-orientation-S" : "") +
+              (plateau[row][col].west ? " rover-orientation-W" : "")
             }
           ></td>
         );

@@ -1,25 +1,26 @@
 import { plateauConstants } from "../constants/plateau.constants";
 import { parametersConstants } from "../constants/parameters.constants";
-import { clearAllCells } from "../actions/plateau.actions";
 const plateauReducerDefaultState = {
   plateau: []
 };
 
+const setOrientation = orientation => {
+  return {
+    north: orientation === "N",
+    east: orientation === "E",
+    south: orientation === "S",
+    west: orientation === "W"
+  };
+};
+
 export default (state = plateauReducerDefaultState, action) => {
   switch (action.type) {
-    case plateauConstants.INITIALISE_PLATEAU:
-    case plateauConstants.CLEAR_ALL_CELLS:
-      return new Array(action.y + 1).fill(0).map(() =>
-        new Array(action.x + 1).fill({
-          startCell: false,
-          endCell: false
-        })
-      );
     case parametersConstants.SET_PARAMETERS:
       const newPlateau = new Array(action.parameters.maxY + 1).fill(0).map(() =>
         new Array(action.parameters.maxX + 1).fill({
           startCell: false,
-          endCell: false
+          endCell: false,
+          visited: false
         })
       );
       return newPlateau.map((row, rowIndex) =>
@@ -28,9 +29,14 @@ export default (state = plateauReducerDefaultState, action) => {
             rowIndex === action.parameters.startY &&
             colIndex === action.parameters.startX
           ) {
-            return { ...cell, startCell: true };
+            return {
+              ...cell,
+              startCell: true,
+              visited: true,
+              ...setOrientation(action.parameters.orientation)
+            };
           } else {
-            return { ...cell, startCell: false };
+            return cell;
           }
         })
       );
@@ -44,22 +50,20 @@ export default (state = plateauReducerDefaultState, action) => {
           }
         })
       );
-      break;
     case plateauConstants.SET_CELL_VISITED:
-      return state.plateau.map((row, rowIndex) =>
+      return state.map((row, rowIndex) =>
         row.map((cell, colIndex) => {
           if (rowIndex === action.y && colIndex === action.x) {
-            return { ...cell, visited: true };
+            return {
+              ...cell,
+              visited: true,
+              ...setOrientation(action.orientation)
+            };
+          } else {
+            return cell;
           }
         })
       );
-      break;
-    case plateauConstants.ROTATE_RIGHT:
-      return state;
-      break;
-    case plateauConstants.ROTATE_LEFT:
-      return state;
-      break;
     default:
       return state;
   }
