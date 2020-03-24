@@ -2,12 +2,12 @@ import React from "react";
 const Slider = props => {
   const { min, max, value, onSliderChange, title, name } = props;
   return (
-    <div className="slider_container">
-      <div className="slider_title">
+    <div className="slider__container">
+      <div className="slider__title">
         {title} {value}
       </div>
-      <div className="slider_control_group">
-        <span className="slider_range">{min}</span>
+      <div className="slider__control-group">
+        <span className="slider__range">{min}</span>
         <input
           type="range"
           min={min}
@@ -17,7 +17,7 @@ const Slider = props => {
           name={name}
           onChange={onSliderChange}
         />
-        <span className="slider_range">{max}</span>
+        <span className="slider__range">{max}</span>
       </div>
     </div>
   );

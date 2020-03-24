@@ -40,22 +40,24 @@ class Header extends Component {
     return (
       <div className="box-layout__title-box">
         <h1 className="box-layout__title">Mars Rover</h1>
-        <Slider
-          title="max X:"
-          min={min}
-          max={max}
-          value={maxX}
-          name={"maxX"}
-          onSliderChange={this.onSliderChange}
-        />
-        <Slider
-          title="max Y:"
-          min={min}
-          max={max}
-          value={maxY}
-          name={"maxY"}
-          onSliderChange={this.onSliderChange}
-        />
+        <div className="box-layout__header-content">
+          <Slider
+            title="max X:"
+            min={min}
+            max={max}
+            value={maxX}
+            name={"maxX"}
+            onSliderChange={this.onSliderChange}
+          />
+          <Slider
+            title="max Y:"
+            min={min}
+            max={max}
+            value={maxY}
+            name={"maxY"}
+            onSliderChange={this.onSliderChange}
+          />
+        </div>
       </div>
     );
   }

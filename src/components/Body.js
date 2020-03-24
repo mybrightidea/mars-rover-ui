@@ -28,7 +28,7 @@ const Body = props => {
   tableRows.push(<tr key={`xLabels`}>{th}</tr>);
 
   return (
-    <div className="box-layout__content">
+    <div className="box-layout__body-content">
       <div className="box-layout__content--table">
         <table>
           <tbody id="plateau">{tableRows}</tbody>

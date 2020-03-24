@@ -23,8 +23,13 @@
   min-width: 40rem;
   min-height: 70rem;
 }
+.box-layout__header-content {
+  @include display-flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-evenly);
+}
 
-.box-layout__content {
+.box-layout__body-content {
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2300675/background-graph-paper.jpg"),
     url("/images/background-graph-paper.jpg");
   background-size: cover;
