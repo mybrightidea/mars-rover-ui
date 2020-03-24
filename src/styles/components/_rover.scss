@@ -34,7 +34,7 @@
   }
 
   td {
-    border: dashed 0.5px $light-grey;
+    border: dashed 0.5px black;
     @include transition(all 0.2s);
     height: 4rem;
     width: 4rem;
@@ -42,6 +42,8 @@
     height: 40px;
     text-align: center;
     vertical-align: middle;
+    color: black;
+    font-weight: bold;
   }
 
   .plateau-cell {

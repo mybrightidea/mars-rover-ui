@@ -1,4 +1,4 @@
-import { parameterConstants } from "../constants/parameter.constants";
+import { parametersConstants } from "../constants/parameters.constants";
 const parametersReducerDefaultState = {
   name: "Rover",
   startX: 0,
@@ -11,32 +11,24 @@ const parametersReducerDefaultState = {
 
 export default (state = parametersReducerDefaultState, action) => {
   switch (action.type) {
-    case parameterConstants.SET_NAME:
+    case parametersConstants.SET_NAME:
       return { ...state, name: action.name };
-    case parameterConstants.SET_ORIENTATION:
+    case parametersConstants.SET_START_ORIENTATION:
       return { ...state, orientation: action.orientation };
-    case parameterConstants.SET_INSTRUCTIONS:
+    case parametersConstants.SET_INSTRUCTIONS:
       return { ...state, instructions: action.instructions };
-    case parameterConstants.SET_START_X:
+    case parametersConstants.SET_START_XY:
       return {
         ...state,
-        startX: action.startX
-      };
-    case parameterConstants.SET_START_Y:
-      return {
-        ...state,
+        startX: action.startX,
         startY: action.startY
       };
-    case parameterConstants.SET_MAX_X:
+    case parametersConstants.PLATEAU_RESIZE:
       return {
         ...state,
         maxX: action.maxX,
-        startX: Math.min(state.startX, action.maxX)
-      };
-    case parameterConstants.SET_MAX_Y:
-      return {
-        ...state,
         maxY: action.maxY,
+        startX: Math.min(state.startX, action.maxX),
         startY: Math.min(state.startY, action.maxY)
       };
     default:

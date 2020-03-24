@@ -1,39 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setMaxX, setMaxY } from "../actions/parameter.actions";
+import { setMaxXY } from "../actions/parameters.actions";
 import Slider from "./Slider";
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      maxX: this.props.parameters.maxX,
-      maxY: this.props.parameters.maxY
-    };
-  }
   onSliderChange = event => {
     const target = event.target;
     const value = parseInt(target.value);
     const name = target.name;
 
-    this.setState(
-      () => ({ [name]: value }),
-      () => {
-        switch (name) {
-          case "maxX":
-            this.props.dispatch(setMaxX(value));
-            break;
-          case "maxY":
-            this.props.dispatch(setMaxY(value));
-            break;
-          default:
-        }
-      }
-    );
+    switch (name) {
+      case "maxX":
+        this.props.dispatch(setMaxXY(value, this.props.parameters.maxY));
+        break;
+      case "maxY":
+        this.props.dispatch(setMaxXY(this.props.parameters.maxX, value));
+        break;
+      default:
+    }
   };
 
   render() {
-    const { maxX, maxY } = this.state;
+    const { maxX, maxY } = this.props.parameters;
     const min = 3;
     const max = 7;
 

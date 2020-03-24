@@ -1,18 +1,32 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Header from "../Header";
 import Body from "../Body";
 import Footer from "../Footer";
+import { intitlialisePlateau } from "../../actions/plateau.actions";
 
-const App = props => {
-  return (
-    <div className="box-layout">
-      <div className="box-layout__box">
-        <Header />
-        <Body />
-        <Footer />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    const { maxX, maxY } = props.parameters;
+    props.dispatch(intitlialisePlateau(maxX, maxY));
+  }
+  render() {
+    return (
+      <div className="box-layout">
+        <div className="box-layout__box">
+          <Header />
+          <Body />
+          <Footer />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default App;
+const mapStateToProps = state => ({
+  parameters: state.parameters,
+  plateau: state.plateau
+});
+
+export default connect(mapStateToProps)(App);

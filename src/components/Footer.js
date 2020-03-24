@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import validator from "validator";
 import { connect } from "react-redux";
 import {
-  setOrientation,
-  setStartX,
-  setStartY,
+  setStartOrientation,
+  setStartXY,
   setInstructions
-} from "../actions/parameter.actions";
+} from "../actions/parameters.actions";
 
 class Footer extends Component {
   onOrientationChange = event => {
-    this.props.dispatch(setOrientation(event.target.value));
+    this.props.dispatch(setStartOrientation(event.target.value));
   };
 
   onStartPositionChange = (event, maxVal) => {
@@ -21,10 +20,14 @@ class Footer extends Component {
     if (validator.isInt(value, { min: 0, max: maxVal })) {
       switch (name) {
         case "startX":
-          this.props.dispatch(setStartX(parseInt(value)));
+          this.props.dispatch(
+            setStartXY(parseInt(value), this.props.parameters.startY)
+          );
           break;
         case "startY":
-          this.props.dispatch(setStartY(parseInt(value)));
+          this.props.dispatch(
+            setStartXY(this.props.parameters.startX, parseInt(value))
+          );
           break;
         default:
       }
