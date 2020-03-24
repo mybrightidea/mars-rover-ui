@@ -1,39 +1,32 @@
 import React, { Component } from "react";
 import validator from "validator";
 import { connect } from "react-redux";
-import { setParameters } from "../actions/process.actions";
+import {
+  setOrientation,
+  setStartX,
+  setStartY,
+  setInstructions
+} from "../actions/parameter.actions";
 
 class Footer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...this.props.parameters };
-  }
+  onOrientationChange = event =>
+    this.props.dispatch(setOrientation(event.target.value));
 
-  onOrientationChange = event => {
-    const target = event.target;
-    const name = target.name;
-
-    const value = target.value;
-
-    this.setState(
-      () => ({ [name]: value }),
-      () => {
-        this.props.dispatch(setParameters(this.state));
-      }
-    );
-  };
   onStartPositionChange = (event, maxVal) => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
 
     if (validator.isInt(value, { min: 0, max: maxVal })) {
-      this.setState(
-        () => ({ [name]: parseInt(value) }),
-        () => {
-          this.props.dispatch(setParameters(this.state));
-        }
-      );
+      switch (name) {
+        case "startX":
+          this.props.dispatch(setStartX(parseInt(value)));
+          break;
+        case "startY":
+          this.props.dispatch(setStartY(parseInt(value)));
+          break;
+        default:
+      }
     }
   };
 
@@ -43,12 +36,7 @@ class Footer extends Component {
     const name = target.name;
 
     if (!value || value.match(/^[LRMlrm]*$/)) {
-      this.setState(
-        () => ({ [name]: value }),
-        () => {
-          this.props.dispatch(setParameters(this.state));
-        }
-      );
+      this.props.dispatch(setInstructionss(value));
     }
   };
 
@@ -57,9 +45,14 @@ class Footer extends Component {
   };
 
   render() {
-    const { startX, startY, orientation, instructions } = this.state;
-    const { maxX, maxY } = this.props.config;
-
+    const {
+      startX,
+      startY,
+      orientation,
+      instructions,
+      maxX,
+      maxY
+    } = this.props.parameters;
     return (
       <div className="box-layout__footer">
         <form className="form">
@@ -86,7 +79,7 @@ class Footer extends Component {
               name="startX"
               min="0"
               max={maxX}
-              value={Math.min(startX, maxX)}
+              value={startX}
             />
           </label>
           <br />
@@ -99,7 +92,7 @@ class Footer extends Component {
               name="startY"
               min="0"
               max={maxY}
-              value={Math.min(startY, maxY)}
+              value={startY}
             />
           </label>
           <br />
@@ -121,8 +114,7 @@ class Footer extends Component {
 }
 
 const mapStateToProps = state => ({
-  parameters: state.parameters,
-  config: state.config
+  parameters: state.parameters
 });
 
 export default connect(mapStateToProps)(Footer);

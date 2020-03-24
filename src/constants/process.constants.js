@@ -1,6 +1,0 @@
-export const processConstants = {
-  CALCULATE_ENDPOINT: "CALCULATE_ENDPOINT",
-  SET_PARAMETERS: "SET_PARAMETERS",
-  SET_MAX_X: "SET_MAX_X",
-  SET_MAX_Y: "SET_MAX_Y"
-};

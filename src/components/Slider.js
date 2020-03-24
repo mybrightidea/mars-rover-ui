@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 const Slider = props => {
   const { min, max, value, onSliderChange, title, name } = props;
   return (

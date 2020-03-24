@@ -2,26 +2,30 @@ import React from "react";
 import { connect } from "react-redux";
 
 const Body = props => {
-  console.log(props);
-  const { maxX, maxY } = props.config;
+  const { maxX, maxY } = props.parameters;
 
-  const th = [];
-  th.push(<td></td>);
-
-  for (let c = 0; c <= maxX; c++) {
-    th.push(<td key={c}>{c}</td>);
-  }
-
+  //array of table rows
   const tableRows = [];
+
   for (let row = maxY; row >= 0; row--) {
     const cells = [];
-    cells.push(<td>{row}</td>);
-    for (let c = 0; c <= maxX; c++) {
-      cells.push(<td key={c}></td>);
+
+    //first column is label
+    cells.push(<td key={`labelRow${row}`}>{row}</td>);
+
+    for (let col = 0; col <= maxX; col++) {
+      cells.push(<td key={`row${row}col${col}`}></td>);
     }
-    tableRows.push(<tr key={row}>{cells}</tr>);
+    tableRows.push(<tr key={`row${row}`}>{cells}</tr>);
   }
-  tableRows.push(th);
+
+  // last row as "header"
+  const th = [];
+  th.push(<td key={`originCorner`}></td>);
+  for (let col = 0; col <= maxX; col++) {
+    th.push(<td key={`labelColcol${col}`}>{col}</td>);
+  }
+  tableRows.push(<tr key={`xLabels`}>{th}</tr>);
 
   return (
     <div className="box-layout__content">
@@ -35,7 +39,7 @@ const Body = props => {
 };
 
 const mapStateToProps = state => ({
-  config: state.config
+  parameters: state.parameters
 });
 
 export default connect(mapStateToProps)(Body);
