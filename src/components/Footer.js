@@ -36,7 +36,7 @@ class Footer extends Component {
     const name = target.name;
 
     if (!value || value.match(/^[LRMlrm]*$/)) {
-      this.props.dispatch(setInstructionss(value));
+      this.props.dispatch(setInstructions(value));
     }
   };
 
@@ -55,59 +55,81 @@ class Footer extends Component {
     } = this.props.parameters;
     return (
       <div className="box-layout__footer">
-        <form className="form">
-          <label htmlFor="orientation">
-            Orientation:
-            <select
-              name="orientation"
-              onChange={this.onOrientationChange}
-              value={orientation}
-            >
-              <option value="N">N</option>
-              <option value="E">E </option>
-              <option value="S">S</option>
-              <option value="W">W</option>
-            </select>
-          </label>
-          <br />
-
-          <label htmlFor="startX">
-            {`Start X (between 0 and ${maxX}):`}
-            <input
-              onChange={e => this.onStartPositionChange(e, maxX)}
-              type="number"
-              name="startX"
-              min="0"
-              max={maxX}
-              value={startX}
-            />
-          </label>
-          <br />
-
-          <label htmlFor="startY">
-            {`Start Y (between 0 and ${maxY}):`}
-            <input
-              onChange={e => this.onStartPositionChange(e, maxY)}
-              type="number"
-              name="startY"
-              min="0"
-              max={maxY}
-              value={startY}
-            />
-          </label>
-          <br />
-
-          <input
-            type="text"
-            name="instructions"
-            placeholder="Instructions"
-            onChange={this.onInstructionsChange}
-            className="text-input"
-            value={instructions}
-          />
-          <br />
-        </form>
-        <button onClick={this.onPlayClick}>Play</button>
+        <div className="box-layout__footer-content">
+          <form className="form">
+            <br />
+            <table className="footer-form">
+              <tbody>
+                <tr>
+                  <td>
+                    <label htmlFor="orientation">Orientation:</label>
+                  </td>
+                  <td>
+                    <select
+                      className="select"
+                      name="orientation"
+                      onChange={this.onOrientationChange}
+                      value={orientation}
+                    >
+                      <option value="N">N</option>
+                      <option value="E">E </option>
+                      <option value="S">S</option>
+                      <option value="W">W</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label htmlFor="startX">{`Start X (0 - ${maxX}):`}</label>
+                  </td>
+                  <td>
+                    <input
+                      className="text-input"
+                      onChange={e => this.onStartPositionChange(e, maxX)}
+                      type="number"
+                      name="startX"
+                      min="0"
+                      max={maxX}
+                      value={startX}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label htmlFor="startY">{`Start Y (0 - ${maxY}):`}</label>
+                  </td>
+                  <td>
+                    <input
+                      className="text-input"
+                      onChange={e => this.onStartPositionChange(e, maxY)}
+                      type="number"
+                      name="startY"
+                      min="0"
+                      max={maxY}
+                      value={startY}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label htmlFor="instructions"></label>Instructions:
+                  </td>
+                  <td>
+                    <input
+                      className="text-input"
+                      type="text"
+                      name="instructions"
+                      placeholder="Instructions"
+                      onChange={this.onInstructionsChange}
+                      value={instructions}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+          <button onClick={this.onPlayClick}>Play</button>
+        </div>
       </div>
     );
   }

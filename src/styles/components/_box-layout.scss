@@ -20,15 +20,14 @@
   padding: $l-size $m-size;
   text-align: center;
 
-  min-width: 40rem;
-  min-height: 70rem;
+  min-width: 45rem;
+  min-height: 80rem;
 }
 .box-layout__header-content {
   @include display-flexbox;
   @include flex-direction(row);
   @include justify-content(space-evenly);
 }
-
 .box-layout__body-content {
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2300675/background-graph-paper.jpg"),
     url("/images/background-graph-paper.jpg");
@@ -64,5 +63,12 @@
 }
 
 .box-layout__footer {
+  color: initial;
+  text-align: left;
+}
+.box-layout__footer-content {
   @include display-flexbox;
+  @include flex-direction(column);
+  @include justify-content(flex-start);
+  @include align-items(flex-start);
 }

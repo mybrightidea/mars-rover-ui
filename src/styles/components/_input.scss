@@ -1,35 +1,20 @@
-  .input-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: $m-size;
+.text-input {
+  border: 1px solid #cacccd;
+  font-size: $font-size-large;
+  font-weight: 300;
+  padding: $xs-size;
+  background-color: $off-white;
+}
 
-      @media (min-width: $desktop-breakpoint) {
-          flex-direction: row;
-          margin-bottom: $l-size;
-      }
+.select {
+  @extend .text-input;
+}
+
+.footer-form {
+  &table,
+  tbody,
+  tr,
+  td {
+    border: none;
   }
-
-  .input-group__item {
-      margin-bottom: $s-size;
-
-      @media (min-width: $desktop-breakpoint) {
-          margin: 0 $s-size 0 0;
-      }
-  }
-
-  .text-input {
-      border: 1px solid #cacccd;
-      height: 50px;
-      font-size: $font-size-large;
-      font-weight: 300;
-      padding: $s-size;
-  }
-
-  .select {
-      @extend .text-input;
-  }
-
-  .textarea {
-      @extend .text-input;
-      height: 10rem;
-  }
+}

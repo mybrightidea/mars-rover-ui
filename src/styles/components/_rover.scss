@@ -1,47 +1,49 @@
-.rover {
-  background-image: url("/images/rover-l.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition: all 1s;
-}
+.box-layout__content--table {
+  .rover {
+    background-image: url("/images/rover-l.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all 1s;
+  }
 
-.start-cell {
-  border: solid 2px green;
-}
+  .start-cell {
+    border: solid 2px green;
+  }
 
-.end-cell {
-  background-color: red;
-}
+  .end-cell {
+    background-color: red;
+  }
 
-.rover-orientation-E {
-  transform: scaleX(-1);
-}
+  .rover-orientation-E {
+    transform: scaleX(-1);
+  }
 
-.rover-orientation-W {
-}
+  .rover-orientation-W {
+  }
 
-.rover-orientation-N {
-  transform: rotate(90deg);
-}
+  .rover-orientation-N {
+    transform: rotate(90deg);
+  }
 
-.rover-orientation-S {
-  transform: rotate(-90deg);
-}
+  .rover-orientation-S {
+    transform: rotate(-90deg);
+  }
 
-table {
-  border: solid 0.5px black;
-}
+  table {
+    border: solid 0.5px black;
+  }
 
-td {
-  border: dashed 0.5px $light-grey;
-  @include transition(all 0.2s);
-  height: 4rem;
-  width: 4rem;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  vertical-align: middle;
-}
+  td {
+    border: dashed 0.5px $light-grey;
+    @include transition(all 0.2s);
+    height: 4rem;
+    width: 4rem;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+  }
 
-.plateau-cell {
+  .plateau-cell {
+  }
 }
