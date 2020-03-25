@@ -19,8 +19,7 @@
     transform: scaleX(-1);
   }
 
-  .rover-orientation-W {
-  }
+  .rover-orientation-W {}
 
   .rover-orientation-N {
     transform: rotate(90deg);
@@ -37,16 +36,21 @@
   td {
     border: dashed 0.5px black;
     @include transition(all 0.2s);
-    height: 4rem;
-    width: 4rem;
-    width: 40px;
-    height: 40px;
+
+
+    height: 3rem;
+    width: 3rem;
+
+    @media (min-width: $desktop-breakpoint) {
+      height: 4rem;
+      width: 4rem;
+    }
+
     text-align: center;
     vertical-align: middle;
     color: black;
     font-weight: bold;
   }
 
-  .plateau-cell {
-  }
+  .plateau-cell {}
 }
