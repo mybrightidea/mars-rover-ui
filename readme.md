@@ -2,7 +2,7 @@
 
 - This has been written in React with Redux store
 
-- It calls thye previously submitted library [here on github](https://github.com/mybrightidea/mars-rover)
+- It calls the previously submitted library [here on github](https://github.com/mybrightidea/mars-rover)
 
 ## Redux store
 
