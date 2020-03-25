@@ -2,10 +2,12 @@
 @import "./base/settings";
 @import "./base/base";
 
+@import "./components/button";
 @import "./components/box-layout";
 @import "./components/slider";
 @import "./components/input";
 @import "./components/rover";
+@import "./components/result";
 
 html {
   box-sizing: border-box;

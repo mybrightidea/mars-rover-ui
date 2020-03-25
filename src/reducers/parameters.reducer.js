@@ -1,10 +1,10 @@
 import { parametersConstants } from "../constants/parameters.constants";
 const parametersReducerDefaultState = {
   name: "Rover",
-  startX: 0,
-  startY: 0,
+  startX: 2,
+  startY: 2,
   orientation: "E",
-  instructions: "LRLRMRRMLL",
+  instructions: "",
   maxX: 5,
   maxY: 5
 };

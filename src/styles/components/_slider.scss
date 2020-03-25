@@ -1,14 +1,54 @@
-.slider__control-group > * {
+.slider__control-group>* {
   vertical-align: middle;
   display: inline-block;
 }
+
 .slider__control-group {
-  padding: 1rem;
+  padding: $m-size;
 }
+
 .slider__title {
-  color: purple;
+  color: $teal;
   display: block;
+  font-weight: bold;
 }
+
 .slider__range {
-  color: green;
+  color: $teal;
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: $m-size;
+  background: $off-white;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: $m-size;
+  height: $m-size;
+  background: $teal;
+  background: url('/images/rover-l.png');
+  background-size: contain;
+  background-position: center;
+  cursor: grabbing;
+}
+
+.slider::-moz-range-thumb {
+  width: $m-size;
+  height: $m-size;
+  background: $teal;
+  background-image: url('/images/rover-l.png');
+  background-size: contain;
+  background-position: center;
+  cursor: grabbing;
 }

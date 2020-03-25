@@ -1,16 +1,32 @@
 .text-input {
-  border: 1px solid #cacccd;
+  border: 1px solid $light-grey;
   font-size: $font-size-large;
   font-weight: 300;
   padding: $xs-size;
-  background-color: $off-white;
+  background-color: white;
+
+  &:hover {
+    background-color: $off-white;
+    cursor: text
+  }
+
+  &[type="number"] {
+    cursor: pointer
+  }
+
 }
 
 .select {
   @extend .text-input;
+
+  &:hover {
+    background-color: $off-white;
+    cursor: pointer
+  }
 }
 
 .footer-form {
+
   &table,
   tbody,
   tr,

@@ -3,6 +3,8 @@ import validator from "validator";
 import { connect } from "react-redux";
 import { jRover } from "../rover";
 import { setCellVisited, setEndCell } from "../actions/plateau.actions";
+import { setResult } from "../actions/result.actions";
+import Result from "./Result";
 
 class Footer extends Component {
   onOrientationChange = event =>
@@ -57,6 +59,7 @@ class Footer extends Component {
     const { x, y, path } = result.roverEndStates[0];
 
     this.props.dispatch(setEndCell(x, y));
+    this.props.dispatch(setResult(result));
 
     this.outputPath(path);
   };
@@ -68,7 +71,7 @@ class Footer extends Component {
     if (path.length > 1) {
       setTimeout(() => {
         this.outputPath(path.slice(1));
-      }, 1500);
+      }, 750);
     }
   };
 
@@ -156,7 +159,10 @@ class Footer extends Component {
               </tbody>
             </table>
           </form>
-          <button onClick={this.onPlayClick}>Play</button>
+          <button className="button" onClick={this.onPlayClick}>
+            Calculate
+          </button>
+          <Result />
         </div>
       </div>
     );
@@ -164,7 +170,8 @@ class Footer extends Component {
 }
 
 const mapStateToProps = state => ({
-  parameters: state.parameters
+  parameters: state.parameters,
+  result: state.result
 });
 
 export default connect(mapStateToProps)(Footer);
