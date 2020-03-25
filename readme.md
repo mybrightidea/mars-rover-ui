@@ -79,3 +79,5 @@ The following elements are rendered:
 `</App>`
 
 Note: I added a trap to stop the rover wandering off the plateau: if the rover instruction would move it outside of the bounds then it is ignored
+
+The page is served from a simple node/express server
