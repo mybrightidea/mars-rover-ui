@@ -96,7 +96,7 @@ export const jRover = {
       roverData
     };
   },
-  runProblem: (roverData = []) => {
+  runProblem: (roverData = [], limit = false, xLimit, yLimit) => {
     return roverData.map(({ x, y, instructions }) => {
       let xEnd = x;
       let yEnd = y;
@@ -118,10 +118,19 @@ export const jRover = {
             const [[dx], [dy]] = MStep;
             xEnd += dx;
             yEnd += dy;
+
+            // stop rover walking off edge
+            if (limit) {
+              xEnd = Math.min(Math.max(0, xEnd), xLimit);
+              yEnd = Math.min(Math.max(0, yEnd), yLimit);
+            }
+
+            // track range counetrs
             maxX = xEnd > maxX ? xEnd : maxX;
             minX = xEnd < minX ? xEnd : minX;
             maxY = yEnd > maxY ? yEnd : maxY;
             minY = yEnd > minY ? yEnd : minY;
+
             accRotation = jRover.identity;
             break;
           case "L":
@@ -156,6 +165,10 @@ export const jRover = {
       return;
     }
     const { maxX, maxY, roverData } = jRover.prepData(input);
-    return { maxX, maxY, roverEndStates: jRover.runProblem(roverData) };
+    return {
+      maxX,
+      maxY,
+      roverEndStates: jRover.runProblem(roverData, true, maxX, maxY)
+    };
   }
 };
