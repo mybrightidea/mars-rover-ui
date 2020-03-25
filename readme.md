@@ -17,8 +17,10 @@ The following data is maintained in the store:
         maxX: 5,            // max X of plateau
         maxY: 5             // max Y of plateau
     },
-    plateau: {          // a 2D array of size [maxX][maxY] holding the state of each position on the plateau used
+    plateau: {          // a 2D array of size [maxX][maxY] holding the state of each position on the plateau
                         // switches used to render each cell by adding formatting css classes
+                        // each orientation stored to make the code simpler at the point of rendering of the element
+
         [][]: {
           startCell: true,  // is the start cell
           endCell: false,   // is te ende cell
@@ -51,7 +53,8 @@ The following data is maintained in the store:
             }
     }
 
-React Rendering
+## React Rendering
+
 The following elements are rendered:
 
 `<App>`
