@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import validator from "validator";
+const validator = require("validator");
 import { connect } from "react-redux";
 import { jRover } from "../rover";
 import { setCellVisited, setEndCell } from "../actions/plateau.actions";
@@ -143,17 +143,23 @@ class Footer extends Component {
                 </tr>
                 <tr>
                   <td>
-                    <label htmlFor="instructions"></label>Instructions:
+                    <label htmlFor="instructions"></label>Instructions (R/L/M):
                   </td>
                   <td>
                     <input
                       className="text-input"
                       type="text"
                       name="instructions"
-                      placeholder="Instructions"
+                      placeholder="R(ight), L(eft) or M(ove)"
                       onChange={this.onInstructionsChange}
                       value={instructions}
                     />
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <em>e.g. "MMLMMR"</em>
                   </td>
                 </tr>
               </tbody>

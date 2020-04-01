@@ -1,20 +1,20 @@
 const webpack = require("webpack");
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = env => {
   console.log("env", env);
 
   const isProduction = env === "production";
-  // const CSSExtract = new ExtractTextPlugin("styles.css");
   const CSSExtract = new MiniCssExtractPlugin({ filename: "styles.css" });
 
   return {
-    entry: ["babel-polyfill", "./src/app.js"],
+    entry: {
+      app: ["./src/app.js"]
+    },
     output: {
       path: path.join(__dirname, "public", "dist"),
-      filename: "bundle.js"
+      filename: "[name].js"
     },
     module: {
       rules: [
@@ -35,18 +35,6 @@ module.exports = env => {
             "css-loader",
             "sass-loader"
           ]
-          // use: CSSExtract.extract({
-          //   use: [
-          //     {
-          //       loader: "css-loader",
-          //       options: { sourceMap: true }
-          //     },
-          //     {
-          //       loader: "sass-loader",
-          //       options: { sourceMap: true }
-          //     }
-          //   ]
-          // })
         }
       ]
     },
