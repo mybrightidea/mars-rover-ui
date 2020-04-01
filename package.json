@@ -10,7 +10,7 @@
     "build:prod": "webpack -p --env production",
     "heroku-postbuild": "npm run build:prod",
     "build:server": "babel server/ssr-server.js -d static",
-    "start": "npm run build:server && node static/ssr-server.js"
+    "start": "npm run build:prod && node server/server.js"
   },
   "repository": {
     "type": "git",
